@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,500&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Open sans';
+}
+
+header{
+
+    background-color: thistle;
+    text-align: center;
+    padding: 25px 0;
+}
+
+nav a{
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    margin: 0 30px;
+    padding: 5px 15px;
+    border-radius: 30px;
+}
+
+nav a:hover{
+    background-color: lavenderblush;
+    color: olivedrab;
+    }
