@@ -7,7 +7,10 @@
 
 body {
   font-family: 'Open Sans', sans-serif;
-  background: linear-gradient(135deg, #d9dade, #72aa3d);
+  background-image: url("../imagenes/WallpaperLoginTwoPeople.jpg");
+  background-size: cover; /* Hace que la imagen cubra todo el fondo */
+  background-position: center; /* Centra la imagen de fondo */
+  background-attachment: fixed; /* Fija la imagen para que no se desplace con el contenido */
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -64,8 +67,8 @@ nav a:hover {
 }
 
 .login-box .avatar {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   opacity: 0.8;
   position: absolute;
   top: -40px;

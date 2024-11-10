@@ -1,56 +1,97 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PateaYJuega</title>
+        <link rel="stylesheet" href="Estilo menu/Contacto.css">
+        <link rel="shortcut icon" href="../PateaYjuega/imagenes/IconopateayJuega.png">
+    </head>
 
-    <!--profe aqui importe la galeria de iconos de una pagina para mis iconos-->
-    <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
+    <body>
+        <header>
+            <nav>
+                <a href="index.html">INICIO</a>
+                <a href="Trofeos.html">TROFEOS</a>
+                <a href="Contacto.html">CONTACTO</a>
+                <a href="Registro.html">REGISTRO</a>
+            </nav>
+        </header>
 
+        <div class="container-form">
+            <div id="confirmationModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2 id="modalTitle">Mensaje Enviado</h2>
+                    <p id="modalMessage">¡Tu mensaje ha sido enviado correctamente! Nos pondremos en contacto contigo pronto.</p>
+                    <button id="closeModal" class="btn-enviar">Aceptar</button>
+                </div>
+            </div>
 
-    <!-- vinculo archivo de estilos de menu-->
-    <link rel="stylesheet" href="Estilo menu/Contacto.css">
-</head>
-<body>
-    <!--codigo menu-->
-<header>
-    <nav>
-        <a href="index.html">INICIO</a>
-        <a href="Horario.html">HORARIO DE TIENDA</a>
-        <a href="#">CONTACTO</a>
-        <a href="cede.html">CEDES</a>
-        <a href="Registro.html">REGISTRO</a>
-        <a href="Coleccion.html">COLECCION</a>
-    </nav>
-</header>
-<!--fin codigo menu-->
+            <div class="info-form">
+                <h2>Contáctanos</h2>
+                <p>¡Únete a nuestra pasión por el deporte! Contáctanos para cualquier consulta o para saber más sobre nuestros eventos.</p>
+                <a href="#"><i class="fa fa-phone"></i> 324-373-5498 </a>
+                <a href="#"><i class="fa fa-envelope"></i> PateaYJuega@gmail.com.co</a>
+                <a href="https://www.google.com/maps/place/Medellín,+Antioquia/"><i class="fa fa-map-marker-alt"></i> Medellín, Antioquia</a>
+            </div>
 
-<!--codigo de formulario de contacto-->
-<div class="container-form">
-    <div class="info-form">
-        <h2>Contáctanos</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui eligendi est voluptates quae ipsam eius, in quasi odio porro aut vel beatae aperiam.</p>
-        <a href="#"><i class="fa fa-phone"></i>3243735498 </a>
-        <a href="#"><i class="fa fa-envelope"></i> Goezcaro97@gmail.com</a>
-        <a href="https://www.google.com/maps/place/Medell%C3%ADn,+Antioquia/@6.2442035,-75.5812115,12z/data=!3m1!4b1!4m6!3m5!1s0x8e4428dfb80fad05:0x42137cfcc7b53b56!8m2!3d6.2476376!4d-75.5658153!16zL20vMDF4XzZz"><i class="fa fa-map-marked"></i> Ciudad, Pais</a>
-    </div>
-    <form action="#" autocomplete="off">
-        <input type="text" name="nombre" placeholder="Tu Nombre" class="campo">
-        <input type="emal" name="email" placeholder="Tu Email" class="campo">
-        <textarea name="mensaje" placeholder="Tu Mensaje..."></textarea>
-        <input type="submit" name="enviar" value="Enviar Mensaje" class="btn-enviar">
-    </form>
-</div>
+            <div class="form">
+                <input type="text" id="nombreUsuario" name="nombre" placeholder="Tu Nombre" class="campo">
+                <input type="email" id="emailUsuario" name="email" placeholder="Tu Email" class="campo">
+                <textarea id="mensajeUsuario" name="mensaje" placeholder="Tu Mensaje..."></textarea>
+                <button id="btnEnviar" name="enviar" class="btn-enviar">Enviar Mensaje</button>
+            </div>
+        </div>
 
-<!--pie pagina-->
-<footer>
-    
-    <p>&copy; Carolina Giraldo - 2023 | Moda</p>
- 
-</footer>
+        <footer>
+            <p>&copy; PateaYJuega - 2024 | Deportes</p>
+        </footer>
 
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const btnEnviar = document.getElementById('btnEnviar');
+                const modal = document.getElementById('confirmationModal');
+                const closeModal = document.getElementById('closeModal');
+                const spanClose = document.querySelector('.modal-content .close');
+                const modalTitle = document.getElementById('modalTitle');
+                const modalMessage = document.getElementById('modalMessage');
 
-</body>
+                btnEnviar.addEventListener('click', () => {
+                    var nombreUsuario = document.getElementById("nombreUsuario").value;
+                    var emailUsuario = document.getElementById("emailUsuario").value;
+                    var mensajeUsuario = document.getElementById("mensajeUsuario").value;
+
+                    if (nombreUsuario && emailUsuario && mensajeUsuario) {
+                        modalTitle.textContent = 'Mensaje Enviado';
+                        modalMessage.textContent = '¡Tu mensaje ha sido enviado correctamente! Nos pondremos en contacto contigo pronto.';
+                        modal.classList.add('show');
+                    } else {
+                        modalTitle.textContent = 'Error';
+                        modalMessage.textContent = 'Por favor, completa todos los campos.';
+                        modal.classList.add('show');
+                    }
+                });
+
+                // Cierra el modal al hacer clic en el botón "Aceptar" o en el icono de cierre
+                closeModal.addEventListener('click', () => {
+                    modal.classList.remove('show');
+                    document.getElementById("nombreUsuario").value = '';
+                    document.getElementById("emailUsuario").value = '';
+                    document.getElementById("mensajeUsuario").value = '';
+                });
+                spanClose.addEventListener('click', () => {
+                    modal.classList.remove('show');
+                });
+
+                // Opcional: Cierra el modal al hacer clic fuera del contenido
+                window.addEventListener('click', (event) => {
+                    if (event.target === modal) {
+                        modal.classList.remove('show');
+                    }
+                });
+            });
+        </script>
+    </body>
 </html>
