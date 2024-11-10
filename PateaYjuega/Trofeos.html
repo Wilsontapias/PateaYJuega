@@ -7,11 +7,148 @@
         <title>PateaYJuega</title>
         <link rel="stylesheet" href="Estilo menu/Trofeos.css">
         <link rel="shortcut icon" href="../PateaYjuega/imagenes/IconopateayJuega.png">
+
+        <style>
+            .main-container {
+                width: 80%;
+                margin: 20px auto;
+                padding: 20px;
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                margin-top: 80px; /* Añadido para separación desde el header */
+                margin-bottom: 80px; /* Añadido para separación desde el footer */
+            }
+            
+            .match-container {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px;
+                border-radius: 10px;
+                background-color: #fff;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+            .team-match {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 10px;
+                background-color: #f9f9f9;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+            .team-match img {
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+            .team-match .teams {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                padding: 0 20px;
+            }
+            .trophy {
+                margin-top: 40px;
+                text-align: center;
+            }
+            .trophy img {
+                width: 150px;
+                height: auto;
+            }
+
+            /* Estilo del modal equipos */
+            .modal-content {
+                background: white;
+                border-radius: 10px;
+                padding: 20px;
+                max-width: 800px;
+                width: 100%;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                position: relative;
+            }
+
+            /* Título VS centrado */
+            .titulo-teams h2 {
+                text-align: center;
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
+
+            /* Estilos para los detalles del equipo */
+            .team-details {
+                display: flex;
+                flex-direction: column; /* Coloca el título arriba y los equipos debajo */
+                align-items: center;
+            }
+
+            .teams {
+                display: flex;
+                justify-content: space-between;
+                gap: 40px; /* Ajusta el espacio entre los equipos */
+                align-items: flex-start;
+                margin-top: 20px;
+                position: relative;
+            }
+
+            #vs-teams {
+                position: absolute; /* Para posicionarlo en el centro */
+                top: 50%; /* Centrado verticalmente */
+                left: 50%; /* Centrado horizontalmente */
+                transform: translate(-50%, -50%); /* Ajusta el centrado */
+                font-size: 24px;
+                font-weight: bold;
+            }
+
+            /* Estilos para cada equipo */
+            .team {
+                margin-right: 85px;
+                margin-left: 85px;
+                display: flex;
+                flex-direction: column; /* La imagen está arriba, la info abajo */
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                flex: 1;
+            }
+
+            .team img {
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                border-radius: 50%;
+                margin-bottom: 10px;
+            }
+
+            .team h3 {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+
+            .team ul {
+                list-style-type: none;
+                padding: 0;
+                font-size: 14px;
+            }
+
+            .team ul li {
+                margin-bottom: 5px;
+            }
+
+            /* Estilo opcional para el fondo oscuro cuando el modal está activo */
+            #modal.active {
+                display: flex;
+            }
+        </style>
     </head>
 
     <body>
         <header>
             <nav>
+                <!-- <img src="../PateaYjuega/imagenes/IconopateayJuega.png" alt=""> -->
                 <a href="index.html">INICIO</a>
                 <a href="Trofeos.html">TROFEOS</a>
                 <a href="Contacto.html">CONTACTO</a>
@@ -19,10 +156,225 @@
             </nav>
         </header>
 
+        <main class="main-container">
+            <div id="modal" class="modal" onclick="closeModal(event)">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <div id="teamDetails">
+                        <!-- Details will be inserted here via JavaScript -->
+                    </div>
+                </div>
+            </div>
+            <!-- Contenedor de partidos -->
+            <div class="match-container">
+                <div class="team-match" id="match1" onclick="showDetails('match1')">
+                    <div class="teams">
+                        <img src="../PateaYjuega/imagenes/EquipoArriate.png" alt="Equipo 1">
+                        <span>Arrieta</span>
+                        <span>VS</span>
+                        <img src="../PateaYjuega/imagenes/EquipoEnsigna.png" alt="Equipo 2">
+                        <span>Ensigna</span>
+                    </div>
+                </div>
 
+                <div class="team-match" id="match2" onclick="showDetails('match2')">
+                    <div class="teams">
+                        <img src="../PateaYjuega/imagenes/EquipoNaranja.png" alt="Equipo 3">
+                        <span>Soccer Orange</span>
+                        <span>VS</span>
+                        <img src="../PateaYjuega/imagenes/EquipoOneCup.png" alt="Equipo 4">
+                        <span>One Cup</span>
+                    </div>
+                </div>
+
+                <div class="team-match" id="match3" onclick="showDetails('match3')">
+                    <div class="teams">
+                        <img src="../PateaYjuega/imagenes/EquipoSlogan.png" alt="Equipo 5">
+                        <span>Champions</span>
+                        <span>VS</span>
+                        <img src="../PateaYjuega/imagenes/EquipoSoccerRojo.png" alt="Equipo 6">
+                        <span>Team Red</span>
+                    </div>
+                </div>
+
+                <div class="team-match" id="match4" onclick="showDetails('match4')">
+                    <div class="teams">
+                        <img src="../PateaYjuega/imagenes/EquipoSocces.png" alt="Equipo 7">
+                        <span>Rivera</span>
+                        <span>VS</span>
+                        <img src="../PateaYjuega/imagenes/EquipoSoccesAzul.png" alt="Equipo 8">
+                        <span>Olimpo Team</span>
+                    </div>
+                </div>
+
+                <div class="team-match" id="match5" onclick="showDetails('match5')">
+                    <div class="teams">
+                        <img src="../PateaYjuega/imagenes/EquiposRojo.png" alt="Equipo 9">
+                        <span>kings</span>
+                        <span>VS</span>
+                        <img src="../PateaYjuega/imagenes/Tournament.png" alt="Equipo 10">
+                        <span>Slayers</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Imagen de la copa mundial -->
+            <div class="trophy">
+                <img src="../PateaYjuega/imagenes/CopaSoccer.png" alt="Copa Mundial">
+            </div>
+        </main>
 
         <footer>
             <p>&copy; PateaYJuega - 2024 | Deportes</p>
         </footer>
     </body>
+    <script>
+        // Datos de los equipos con detalles aleatorios
+        const teamData = {
+            match1: {
+                team1: {
+                    name: "Arrieta",
+                    image: "../PateaYjuega/imagenes/EquipoArriate.png",
+                    characteristics: [
+                        "Fundación: 1895",
+                        "Campeonatos: 10",
+                        "Estadio: Estadio Azul",
+                        "Director: Roberto Pérez"
+                    ]
+                },
+                team2: {
+                    name: "Ensigna",
+                    image: "../PateaYjuega/imagenes/EquipoEnsigna.png",
+                    characteristics: [
+                        "Fundación: 1920",
+                        "Campeonatos: 8",
+                        "Estadio: Arena Roja",
+                        "Director: Laura Gómez"
+                    ]
+                }
+            },
+            match2: {
+                team1: {
+                    name: "Soccer Orange",
+                    image: "../PateaYjuega/imagenes/EquipoNaranja.png",
+                    characteristics: [
+                        "Fundación: 1985",
+                        "Campeonatos: 4",
+                        "Estadio: Naranja Stadium",
+                        "Director: Luis Sánchez"
+                    ]
+                },
+                team2: {
+                    name: "One Cup",
+                    image: "../PateaYjuega/imagenes/EquipoOneCup.png",
+                    characteristics: [
+                        "Fundación: 2000",
+                        "Campeonatos: 2",
+                        "Estadio: The Cup Arena",
+                        "Director: Sara Ruiz"
+                    ]
+                }
+            },
+            match3: {
+                team1: {
+                    name: "Champions",
+                    image: "../PateaYjuega/imagenes/EquipoSlogan.png",
+                    characteristics: [
+                        "Fundación: 1901",
+                        "Campeonatos: 12",
+                        "Estadio: Victory Park",
+                        "Director: José Martínez"
+                    ]
+                },
+                team2: {
+                    name: "Team Red",
+                    image: "../PateaYjuega/imagenes/EquipoSoccerRojo.png",
+                    characteristics: [
+                        "Fundación: 1990",
+                        "Campeonatos: 6",
+                        "Estadio: Red Arena",
+                        "Director: Miguel Torres"
+                    ]
+                }
+            },
+            match4: {
+                team1: {
+                    name: "Rivera",
+                    image: "../PateaYjuega/imagenes/EquipoSocces.png",
+                    characteristics: [
+                        "Fundación: 1910",
+                        "Campeonatos: 7",
+                        "Estadio: River Stadium",
+                        "Director: Andrés Pérez"
+                    ]
+                },
+                team2: {
+                    name: "Olimpo Team",
+                    image: "../PateaYjuega/imagenes/EquipoSoccesAzul.png",
+                    characteristics: [
+                        "Fundación: 1995",
+                        "Campeonatos: 3",
+                        "Estadio: Olimpo Arena",
+                        "Director: Ana Rodríguez"
+                    ]
+                }
+            },
+            match5: {
+                team1: {
+                    name: "Kings",
+                    image: "../PateaYjuega/imagenes/EquiposRojo.png",
+                    characteristics: [
+                        "Fundación: 1980",
+                        "Campeonatos: 9",
+                        "Estadio: Kings Park",
+                        "Director: Juan González"
+                    ]
+                },
+                team2: {
+                    name: "Slayers",
+                    image: "../PateaYjuega/imagenes/Tournament.png",
+                    characteristics: [
+                        "Fundación: 2005",
+                        "Campeonatos: 4",
+                        "Estadio: Slayer Field",
+                        "Director: Carmen Díaz"
+                    ]
+                }
+            }
+        };
+
+        function showDetails(matchId) {
+            const match = teamData[matchId];
+            const teamDetailsDiv = document.getElementById('teamDetails');
+            teamDetailsDiv.innerHTML = `
+                <div class="team-details">
+                    <div class="teams">
+                        <div class="team">
+                            <img src="${match.team1.image}" alt="${match.team1.name}">
+                            <h3>${match.team1.name}</h3>
+                            <ul>
+                                ${match.team1.characteristics.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <h1 id="vs-teams">VS</h1>
+                        <div class="team">
+                            <img src="${match.team2.image}" alt="${match.team2.name}">
+                            <h3>${match.team2.name}</h3>
+                            <ul>
+                                ${match.team2.characteristics.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modal').style.display = 'block';
+        }
+
+
+        function closeModal(event) {
+            if (event.target === document.getElementById('modal') || event.target === document.querySelector('.close')) {
+                document.getElementById('modal').style.display = 'none';
+            }
+        }
+    </script>
 </html>

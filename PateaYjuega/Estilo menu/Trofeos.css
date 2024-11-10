@@ -17,6 +17,132 @@ body {
     background-color: #f4f4f9;
 }
 
+/* Contenedor de los equipos */
+.team-match {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #f1f8e9;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-match:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Imágenes de los equipos */
+.team img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 12px;
+    width: 60%;
+    max-width: 600px;
+}
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 25px;
+    top: 0;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Detalles de los equipos dentro del modal */
+#teamDetails {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+}
+
+#teamDetails .team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#teamDetails img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+#teamDetails .team span {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#teamDetails .team .characteristics {
+    font-size: 14px;
+    color: #555;
+    margin-top: 10px;
+}
+
+
+/* Fondo de la página */
+body {
+    background-image: url("../imagenes/WallpaperLoginTwoPeople.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Ajustes para el contenedor principal */
+.main-container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+
+/* El resto de los estilos se mantienen igual */
+
+img {
+    -webkit-user-drag: none;  /* Evita arrastrar en navegadores basados en WebKit */
+    user-drag: none;          /* Evita arrastrar en otros navegadores */
+}
+
 /* Encabezado fijo */
 header {
     width: 100%;

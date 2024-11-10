@@ -1,48 +1,142 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>PateaYJuega</title>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PateaYJuega</title>
 
-        <link rel="stylesheet" href="Estilo menu/Registro.css">
-        <link rel="shortcut icon" href="../PateaYjuega/imagenes/IconopateayJuega.png">
-    </head>
-    <body>
+    <link rel="stylesheet" href="Estilo menu/Registro.css">
+    <link rel="shortcut icon" href="../PateaYjuega/imagenes/IconopateayJuega.png">
+</head>
+<body>
 
-        <header>
-            <nav>
-                <a href="index.html">INICIO</a>
-                <a href="Trofeos.html">TROFEOS</a>
-                <a href="Contacto.html">CONTACTO</a>
-                <a href="Registro.html">REGISTRO</a>
-            </nav>
-        </header>
+<header>
+    <nav>
+        <a href="index.html">INICIO</a>
+        <a href="Trofeos.html">TROFEOS</a>
+        <a href="Contacto.html">CONTACTO</a>
+        <a href="Registro.html">REGISTRO</a>
+    </nav>
+</header>
 
-        <main class="main-container">
-            <div class="login-box">
-                <img src="imagenes/IconopateayJuega.png" class="avatar" alt="Avatar Image">
-                <h1>Iniciar sesión</h1>
-                <form>
-                    <label for="username">Nombre</label>
-                    <input type="text" placeholder="Ingresa tu nombre">
+<main class="main-container">
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <!-- Contenido del modal se cargará dinámicamente aquí -->
+        </div>
+    </div>
 
-                    <label for="username">Correo</label>
-                    <input type="text" placeholder="Ingresa tu correo">
+    <div class="login-box">
+        <img src="imagenes/IconopateayJuega.png" class="avatar" alt="Avatar Image">
+        <h1>Iniciar sesión</h1>
+        <form id="loginForm">
+            <label for="loginEmail">Correo</label>
+            <input type="text" id="loginEmail" placeholder="Ingresa tu correo">
 
-                    <label for="password">Contraseña</label>
-                    <input type="password" placeholder="Ingresa tu contraseña">
+            <label for="loginPassword">Contraseña</label>
+            <input type="password" id="loginPassword" placeholder="Ingresa tu contraseña">
 
-                    <input type="submit" value="Iniciar">
-                    
-                    <a href="#" id="Registro">¿No tienes una cuenta? Regístrate</a>
-                </form>
-            </div>
-        </main>
+            <input type="submit" value="Iniciar">
+            
+            <a href="#" id="Registro">¿No tienes una cuenta? Regístrate</a>
+        </form>
+    </div>
+</main>
 
-        <footer>
-            <p>&copy; PateaYJuega - 2024 | Deportes</p>
-        </footer>
-    </body>
+<footer>
+    <p>&copy; PateaYJuega - 2024 | Deportes</p>
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const Registro = document.getElementById('Registro');
+        const modal = document.getElementById('confirmationModal');
+        const modalContent = document.querySelector('.modal-content');
+
+        // Mostrar el modal de registro
+        Registro.addEventListener('click', () => {
+            const modalHTML = `
+                <span class="close">&times;</span>
+                <h2 id="modalTitle">Crear usuario</h2>
+                <label for="userCreate">Nombre</label>
+                <input id="userCreate" type="text" placeholder="Ingresa tu nombre">
+
+                <label for="emailCreate">Correo</label>
+                <input id="emailCreate" type="text" placeholder="Ingresa tu correo">
+
+                <label for="passwordCreate">Contraseña</label>
+                <input id="passwordCreate" type="password" placeholder="Ingresa tu contraseña">
+
+                <button id="createUserButton" class="btn-enviar">Crear usuario</button>
+            `;
+            modalContent.innerHTML = modalHTML;
+            modal.classList.add('show');
+
+            // Evento para cerrar el modal
+            document.querySelector('.modal-content .close').addEventListener('click', () => {
+                modal.classList.remove('show');
+            });
+
+            // Evento para crear el usuario
+            document.getElementById('createUserButton').addEventListener('click', () => {
+                const userCreate = document.getElementById('userCreate').value;
+                const emailCreate = document.getElementById('emailCreate').value;
+                const passwordCreate = document.getElementById('passwordCreate').value;
+
+                if(userCreate && emailCreate && passwordCreate) {
+                    // Guardar usuario en Local Storage
+                    const users = JSON.parse(localStorage.getItem('users')) || [];
+                    users.push({ name: userCreate, email: emailCreate, password: passwordCreate });
+                    localStorage.setItem('users', JSON.stringify(users));
+
+                    // Confirmación de creación de usuario
+                    modalContent.innerHTML = `
+                        <span class="close">&times;</span>
+                        <h2>Usuario creado</h2>
+                        <p>El usuario <strong>${userCreate}</strong> fue creado correctamente.</p>
+                        <button id="closeModalAll" class="btn-enviar">Cerrar</button>
+                    `;
+
+                    document.querySelector('.modal-content .close').addEventListener('click', () => {
+                        modal.classList.remove('show');
+                    });
+                    document.getElementById('closeModalAll').addEventListener('click', () => {
+                        modal.classList.remove('show');
+                    });
+                } else {
+                    alert("Complete todos los campos.");
+                }
+            });
+        });
+
+        // Validar el inicio de sesión
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const loginEmail = document.getElementById('loginEmail').value;
+            const loginPassword = document.getElementById('loginPassword').value;
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+
+            // Verificar si el usuario existe y la contraseña es correcta
+            const user = users.find(u => u.email === loginEmail && u.password === loginPassword);
+
+            if (user) {
+                alert(`Bienvenido, ${user.name}!`);
+                document.getElementById("loginEmail").value = '';
+                document.getElementById("loginPassword").value = '';
+            } else {
+                alert("Correo o contraseña incorrectos o usuario no existe.");
+            }
+        });
+
+        // Cerrar modal si se hace clic fuera del contenido
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.classList.remove('show');
+            }
+        });
+    });
+</script>
+</body>
 </html>
